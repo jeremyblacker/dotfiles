@@ -1,3 +1,4 @@
+# -*- mode: shell-script -*-
 ##############################################################################
 # Changes the prompt to a Jeremy-style 
 # Also uses the prompt_callback

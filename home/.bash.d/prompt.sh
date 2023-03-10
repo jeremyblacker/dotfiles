@@ -18,7 +18,13 @@ if [[ ${#ColorNames[*]} = 0 || -z "$IntenseBlack" || -z "$ResetColor" ]]; then
     source "$DIR/prompt-colors.sh"  
 fi
 
-PS1="\[\e[1;32m\][${ResetColor}${BrightRed}\u${ResetColor}${BrightYellow}@${ResetColor}${BrightBlue}local${ResetColor}${BrightRed}:${ResetColor}${Magenta}\w${ResetColor}${Green}]${ResetColor}\n ${Green}\\$ ${ResetColor}"
+if [ -n "$SSH_TTY" ]; then
+    # Use differnt colors when ssh'd in
+    export PS1="${Green}[${ResetColor}${Red}\u${ResetColor}${Blue}@${ResetColor}${Yellow}\H${ResetColor}${BoldRed}:${ResetColor}${BrightBlue}\w${ResetColor}${Green}]${ResetColor}\n ${Green}\\$ ${ResetColor}"
+else
+    export PS1="${Green}[${ResetColor}${BrightRed}\u${ResetColor}${BrightYellow}@${ResetColor}${BrightBlue}local${ResetColor}${BrightRed}:${ResetColor}${Magenta}\w${ResetColor}${Green}]${ResetColor}\n ${Green}\\$ ${ResetColor}"
+fi
+
 #PS1="${Green}[${ResetColor}${Red}\u${ResetColor}${Yellow}@${ResetColor}${Blue}\H${ResetColor}${Red}:${ResetColor}${Violet}\w${ResetColor}${Green}]${ResetColor}\n ${Green}\\$ ${ResetColor}"
 
 # Moved to its own file since it's getting complex
