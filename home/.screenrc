@@ -1,0 +1,25 @@
+escape ^Oo
+startup_message off
+autodetach on
+hardstatus on
+hardstatus alwayslastline
+hardstatus string '%{= mW}%-Lw%{= KW}%50>%n%f* %t%{= mW}%+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
+
+#term xterm-16color
+#term screenbce
+#attrcolor b ".I"    # allow bold colors - necessary for some reason
+#termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # tell screen how to set colors. AB = background, AF=foreground
+#defbce on    # use current bg color for erased chars
+bind j focus down
+bind k focus up
+bind t focus top
+bind b focus bottom
+bind h focus left
+bind l focus right
+
+defscrollback 15000
+compacthist on
+altscreen on
+bind = resize =
+bind + resize +1
+bind - resize -1

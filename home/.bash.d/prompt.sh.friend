@@ -1,0 +1,25 @@
+# Moved to its own file since it's getting complex
+PROMPT_COMMAND='history -a'
+# https://github.com/magicmonty/bash-git-prompt
+if [ -f /usr/local/share/gitprompt.sh ]; then
+GIT_PROMPT_ONLY_IN_REPO=1
+GIT_PROMPT_THEME=Minimal
+. /usr/local/share/gitprompt.sh
+fi
+# Prompt
+case $TERM in
+xterm*|rxvt*|screen*|linux|cygwin)
+if [ `whoami` = root ]; then
+PS1='\[\e[1;31m\][\u@\h \W]\$\[\e[0m\] '
+else
+PS1="\[\e[01;37m\][\T]\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\[\e[01;37m\][\u\[\e[0m\]\[\e[00;37m\]@\[\e[0m\]\[\e[01;37m\]\H\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[01;32m\]\w\[\e[0m\]\[\e[01;37m\]]\[\e[0m\]\[\e[00;37m\]\n\[\e[0m\]\[\e[01;33m\]\\$\[\e[0m\]\[\e[00;37m\] \[\e[0m\]"
+fi
+;;
+vt100)
+PS1='[\u@${HOSTNAME} \w]\n \#\$ '
+;;
+*)
+PS1='\[\e[${PROMPT_COLOR}\][\u@${HOSTNAME} \w]\n \#\$ \[\e[m\]'
+;;
+esac
+export PS4='+(${BASH_SOURCE##*/}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): } '
