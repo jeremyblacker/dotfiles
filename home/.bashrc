@@ -14,8 +14,12 @@ alias deepsleep="sudo pmset -b hibernatemode 25;pmset -g | grep hibernatemode"
 alias lightsleep="sudo pmset -b hibernatemode 3 ;pmset -g | grep hibernatemode"
 alias sleepmode="pmset -g | grep hibernatemode"
 alias sha1="/usr/bin/openssl sha1"
-export PERL5LIB=$HOME/perl5/Library/Perl/Updates/5.10.0:$HOME/perl5/lib/perl5/site_perl:$HOME/perl5:/Users/ublacj2/perl5/lib/perl5:$PERL5LIB
-export PATH=/Users/ublacj2/.gem/ruby/1.8/bin:$PATH
+
+# The line below only needs to be set up once for cpan to install to local::lib ... or it might need to be set up whenever Perl is updated in homebrew?
+# PERL_MM_OPT="INSTALL_BASE=$HOME/perl5" cpan local::lib && chown -R "$USER" "$HOME/perl5"
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+
+
 #export PATH=/usr/local/texlive/2013basic/bin/x86_64-darwin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/bin:$PATH
