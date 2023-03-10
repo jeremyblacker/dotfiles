@@ -120,14 +120,6 @@ alias snvdiff="svn diff --diff-cmd=colordiff"
  
 alias insecure-chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --allow-running-insecure-content > /dev/null 2>&1 &"
 
-function killssh {
-    if [ -n "$1" ]
-    then
-	kill $(ps -ef | grep "ss[h].*${1}" | grep -v 'agent' | awk '{print $2}')
-    else
-	kill $(ps -ef | grep 'ss[h]' | grep -vE '(agent|emacs|vim)' | awk '{print $2}')
-    fi
-}
 
 function revert-sed {
     for F in `ls | grep '.bak'`; do mv -v $F `echo $F | sed 's/\.bak//'`; done
@@ -137,28 +129,6 @@ function revert-sed {
 function sudosvn {
     svn --config-option "config:tunnels:ssh=$SVN_SSH ssh -l $1"
 }
-
-
-export SSH_ENV="$HOME/.ssh/environment"
-
-function start_agent {
-    echo "Initializing new SSH agent..."
-    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-    echo succeeded
-    chmod 600 "${SSH_ENV}"
-    . "${SSH_ENV}" > /dev/null
-    /usr/bin/ssh-add;
-}
-
-# Source SSH settings, if applicable
-if [ -f "${SSH_ENV}" ]; then
-    . "${SSH_ENV}" > /dev/null
-    ps -ef | grep ${SSH_AGENT_PID} | egrep '/usr/bin/ssh-agent$' > /dev/null || {
-        start_agent;
-    }
-else
-    start_agent;
-fi
 
 
 alias restart-camera="sudo killall VDCAssistant"
@@ -176,12 +146,6 @@ alias wifi-off="/usr/sbin/networksetup -setairportpower en0 off"
 
 alias move-resume="mv $HOME/Downloads/Jeremy\ Blacker\ Resume.pdf $HOME/Google\ Drive/My\ Drive/Documents/Career/resumes/jeremy_blacker_resume.pdf"
 alias grep-git-blame-timestamps="grep -Eo '[0-9]{4}(-[0-9]{2}){2} ( |[0-9])[0-9]:[0-9]{2}:[0-9]{2} -[0-9]{4}'"
-
-# For use on a remote server
-function getssh {
-    commands="$(export | grep SSH)"
-    screen -X register . "${commands}\n"
-}
 
 alias jeremy-firefox="nohup /Applications/Firefox.app/Contents/MacOS/firefox --no-remote --profile \"$HOME/Library/Application Support/Firefox/Profiles/omzg480m.default-release\" >/dev/null &"
 
