@@ -7,10 +7,7 @@ fi
 for script in $(ls ${HOME}/.bash.d/*.sh); do
     source $script
 done;
-#source ${HOME}/.bash.d/prompt.sh
-# if [ -r "${HOME}/.bash.d/work.sh" ]; then
-#     . $HOME/.bash.d/work.sh
-# fi
+
 export EDITOR=emacs
 alias ll="ls -l"
 alias deepsleep="sudo pmset -b hibernatemode 25;pmset -g | grep hibernatemode"
