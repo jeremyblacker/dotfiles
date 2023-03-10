@@ -14,6 +14,7 @@ export EDITOR=emacs
 alias ll="ls -l"
 alias grep="grep --color"
 alias egrep="grep -E --color"
+alias grep-bashrc='grep -hE ~/.bashrc ~/.bash.d/* --exclude 1password-cli-completion.sh -e'
 alias cd="pushd"
 alias bd="popd"
 alias gpgsign="gpg2 -e -r 'Jeremy Blacker <jblacker@brandeis.edu>'"
