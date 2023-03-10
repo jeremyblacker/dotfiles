@@ -64,7 +64,7 @@ function emacs-clean  {
     find . \( -path '*.emacs.d*' -o -path '*/Library/*' \) -prune -o -type f \( -name '*~' -o -name '\#*' -o -name '\.\#*' \) -exec rm {} \; -print
 }
 
-# Pipe a 'ps -ef | grep <searchteam>' to this
+# e.g. `ps -ef | grep 'searchter[m]' | killit`
 function killit {
     while read -r process
     do
@@ -110,14 +110,6 @@ function join {
     local IFS="$1"
     shift
     echo "$*"
-}
-
-# Pipe a 'ps -ef | grep <searchteam>' to this
-function killit {
-    while read -r process
-    do
-	[ -n "$process" ] && kill `echo $process | grep -v grep | awk '{print $2}'`
-    done
 }
 
 alias snv="svn"
@@ -173,13 +165,6 @@ alias restart-camera="sudo killall VDCAssistant"
 # Where is the perl library located?
 # perl -MTAP::Harness::JUnit -e'print $_ . " => " . $INC{$_} . "\n" for keys %INC' | egrep -i 'tap|harness|object|base
 
-
-function killit {
-    while read -r process
-    do
-	[ -n "$process" ] && kill `echo $process | grep -v grep | awk '{print $2}'`
-    done
-}
 
 alias pbcopy="pbcopy;echo"
 alias clear-dns-cache="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
