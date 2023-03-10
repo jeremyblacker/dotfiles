@@ -1,27 +1,20 @@
-# PS1="\[\e[0;32m\][\[\033[31m\]\u@\[\033[34m\]\H\[\e[m\]()\w\[\e[0;32m\]]\$ \[\e[m\]"
-# Color escape below. terminal redraws, resizes, etc, will break your prompt and the coloring often times. that's why you need to escape color even if you're putting a new color on after
-# \[\e[0m\]
-# \[ $color_setting \]
-# \e[0; <- sets the style of the color. 0 is regular 1 is bold (which appears brighter)
-# 35m  <- defines the color
-# Black       0;30     Dark Gray     1;30
-# Blue        0;34     Light Blue    1;34
-# Green       0;32     Light Green   1;32
-# Cyan        0;36     Light Cyan    1;36
-# Red         0;31     Light Red     1;31
-# Purple      0;35     Light Purple  1;35
-# Brown       0;33     Yellow        1;33
-# Light Gray  0;37     White         1;37
+export HISTFILESIZE=100000
+export PROMPT_COMMAND="history -a; history -c; history -r; ${PROMPT_COMMAND}"
+export HISTCONTROL=ignoredups
+# time be time, mon
+export HISTTIMEFORMAT='%F %T '
+# collapse multiline commands into one history entry
+shopt -s cmdhist
+# append to the history file instead of overwriting
+shopt -s histappend
+# Prevent the occasional overwriting of the same line 
+shopt -s checkwinsize
 
-# PS1="\[\e[0;32m\][\[\e[0m\]\[\e[0;31m\]\u\[\e[0m\]\[\e[0;33m\]@\[\e[0m\]\[\e[1;34m\]\H\[\e[0m\]\[\e[1;31m\]:\[\e[0m\]\[\e[0;35m\]\w\[\e[0m\]\[\e[0;32m\]]\[\e[0m\]\n\[\e[0;32m\] \\$\[\e[0m\] "
-# Brighter one below
-# PS1="\[\e[1;33m\][\[\e[0m\]\[\e[1;31m\]\u\[\e[0m\]\[\e[1;32m\]@\[\e[0m\]\[\e[1;34m\]\H\[\e[0m\]\[\e[1;31m\]:\[\e[0m\]\[\e[1;35m\]\w\[\e[0m\]\[\e[1;33m\]]\[\e[0m\]\n\[\e[1;33m\] \\$\[\e[0m\] "
-
-THIS_SCRIPT="${BASH_SOURCE[0]}"
-DIR="$(dirname $THIS_SCRIPT)"
 
 # do the color definitions only once
 if [[ ${#ColorNames[*]} = 0 || -z "$IntenseBlack" || -z "$ResetColor" ]]; then
+    THIS_SCRIPT="${BASH_SOURCE[0]}"
+    DIR="$(dirname $THIS_SCRIPT)"
     source "$DIR/prompt-colors.sh"  
 fi
 
@@ -92,3 +85,24 @@ fi
 # [12:05 PM] Friend: until it seeps into your unconscious brain
 # [12:06 PM] Friend: i have at least some measure of internal self-consistency
 # [12:06 PM] Friend: i.e. i looked at the github readme for the git prompt thing and thought "oooh, this actually looks pretty nice"
+
+
+### Old stuff and color escape codes for reference
+# PS1="\[\e[0;32m\][\[\033[31m\]\u@\[\033[34m\]\H\[\e[m\]()\w\[\e[0;32m\]]\$ \[\e[m\]"
+# Color escape below. terminal redraws, resizes, etc, will break your prompt and the coloring often times. that's why you need to escape color even if you're putting a new color on after
+# \[\e[0m\]
+# \[ $color_setting \]
+# \e[0; <- sets the style of the color. 0 is regular 1 is bold (which appears brighter)
+# 35m  <- defines the color
+# Black       0;30     Dark Gray     1;30
+# Blue        0;34     Light Blue    1;34
+# Green       0;32     Light Green   1;32
+# Cyan        0;36     Light Cyan    1;36
+# Red         0;31     Light Red     1;31
+# Purple      0;35     Light Purple  1;35
+# Brown       0;33     Yellow        1;33
+# Light Gray  0;37     White         1;37
+
+# PS1="\[\e[0;32m\][\[\e[0m\]\[\e[0;31m\]\u\[\e[0m\]\[\e[0;33m\]@\[\e[0m\]\[\e[1;34m\]\H\[\e[0m\]\[\e[1;31m\]:\[\e[0m\]\[\e[0;35m\]\w\[\e[0m\]\[\e[0;32m\]]\[\e[0m\]\n\[\e[0;32m\] \\$\[\e[0m\] "
+# Brighter one below
+# PS1="\[\e[1;33m\][\[\e[0m\]\[\e[1;31m\]\u\[\e[0m\]\[\e[1;32m\]@\[\e[0m\]\[\e[1;34m\]\H\[\e[0m\]\[\e[1;31m\]:\[\e[0m\]\[\e[1;35m\]\w\[\e[0m\]\[\e[1;33m\]]\[\e[0m\]\n\[\e[1;33m\] \\$\[\e[0m\] "
