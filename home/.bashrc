@@ -8,6 +8,14 @@ for script in $(ls ${HOME}/.bash.d/*.sh); do
     source $script
 done;
 
+export PATH=/usr/local/bin:$PATH
+export PATH=$HOME/bin:$PATH
+export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+# Use GNU grep (with PCRE!), egrep, fgrep from Brew 
+export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
+
+
+
 export EDITOR=emacs
 alias ll="ls -l"
 alias deepsleep="sudo pmset -b hibernatemode 25;pmset -g | grep hibernatemode"
@@ -20,15 +28,6 @@ alias sha1="/usr/bin/openssl sha1"
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 
 
-#export PATH=/usr/local/texlive/2013basic/bin/x86_64-darwin:$PATH
-export PATH=/usr/local/bin:$PATH
-export PATH=$HOME/bin:$PATH
-#export PATH=/opt/cisco/anyconnect/bin:$PATH
-export PATH="/usr/local/opt/python@3.8/bin:$PATH"
-#export TEX=/usr/local/texlive/2013basic/bin/x86_64-darwin/tex
-
-# Use GNU grep (with PCRE!), egrep, fgrep from Brew 
-export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
 
 alias grep="grep --color"
 alias egrep="grep -E --color"
@@ -39,6 +38,8 @@ alias check-tcp-ports="sudo lsof -iTCP -sTCP:LISTEN -n -P"
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+### Bash Completion
 if [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]]; then
    . "/usr/local/etc/profile.d/bash_completion.sh"
    . "${HOME}/.bash.d/1password-cli-completion.sh"
@@ -134,7 +135,7 @@ function sudosvn {
 alias restart-camera="sudo killall VDCAssistant"
 
 # Where is the perl library located?
-# perl -MTAP::Harness::JUnit -e'print $_ . " => " . $INC{$_} . "\n" for keys %INC' | egrep -i 'tap|harness|object|base
+# perl -MTAP::Harness::JUnit -e'print $_ . " => " . $INC{$_} . "\n" for keys %INC' | grep -Ei 'tap|harness|object|base
 
 
 alias pbcopy="pbcopy;echo"
