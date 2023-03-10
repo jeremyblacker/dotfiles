@@ -26,20 +26,27 @@ override_git_prompt_colors() {
 
   #Overrides the prompt_callback function used by bash-git-prompt
   function prompt_callback {
-    local PS1="${Green}[${ResetColor}${BrightRed}\u${ResetColor}${BrightYellow}@${ResetColor}${BrightBlue}local${ResetColor}${BrightRed}:${ResetColor}${BrightYellow}\w${ResetColor}${Green}]${ResetColor}"        
+    if [ -n "$SSH_TTY" ]; then
+      # Use differnt colors when ssh'd in      
+      local PS1="${BrightGreen}[${ResetColor}${BrightRed}\u${ResetColor}${BoldBlue}@${ResetColor}${BrightYellow}\H${ResetColor}${BrightRed}:${ResetColor}${BrightBlue}\w${ResetColor}${BrightGreen}]${ResetColor}"
+    else
+      # Local machine
+      local PS1="${Green}[${ResetColor}${BrightRed}\u${ResetColor}${BrightYellow}@${ResetColor}${BrightBlue}local${ResetColor}${BrightRed}:${ResetColor}${BrightYellow}\w${ResetColor}${Green}]${ResetColor}"
+    fi
     gp_set_window_title "$PS1"
   }
-
-#  local gp_end=" _LAST_COMMAND_INDICATOR_\n${White}${Time12a}${ResetColor}"
-#  local gp_end=" _LAST_COMMAND_INDICATOR_\n"
+  
+  # Othewise we get the time in the prompt
   unset Time12a;
   local gp_end="_LAST_COMMAND_INDICATOR_"
-
+  
   GIT_PROMPT_START_USER=""
-  # GIT_PROMPT_END_USER="${gp_end}${Green}\$${ResetColor} "
-  # GIT_PROMPT_END_ROOT="${gp_end}${Green}\#${ResetColor} "
   GIT_PROMPT_END_USER="${gp_end}\n ${Green}\$${ResetColor} "
-  GIT_PROMPT_END_ROOT="${gp_end}\n ${Green}\#${ResetColor} "  
+  GIT_PROMPT_END_ROOT="${gp_end}\n ${Green}\#${ResetColor} "
 }
 
-reload_git_prompt_colors "TruncatedPwd_WindowTitle"
+if [[ -n "$(which lsb_release)" && $(lsb_release -si) == "Ubuntu" ]]; then
+  reload_git_prompt_colors "TruncatedPwd_WindowTitle_Ubuntu"
+else
+  reload_git_prompt_colors "TruncatedPwd_WindowTitle"
+fi
