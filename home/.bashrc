@@ -10,7 +10,15 @@ done;
 
 export PATH=$HOME/bin:$PATH
 
-export EDITOR=emacs
+if [ -n $(which emacs) ]; then
+    export EDITOR=emacs
+elif [ -n $(which vim) ]; then
+    export EDITOR=vim
+elif [ -n $(which vi) ]; then
+    export EDITOR=vi
+else
+    echo 'NO EMACS, NO VIM, and NO VI?!?!?!?!'
+fi
 alias ll="ls -l"
 alias grep="grep --color"
 alias egrep="grep -E --color"
