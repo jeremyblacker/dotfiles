@@ -68,12 +68,21 @@ function killit {
 }
 
 
-# Properly iterate over list of strings containing spaces
-# old_IFS="$IFS"
-# IFS=$'\n'
-# for R in $(lookupMailList <mail-list>@<doman>.com | awk -F': ' '{print $2}'); do echo "$R"; done;
-# LIST="$(lookupMailList <mail-list>@<domain>.com | awk -F': ' '{print $2}' | awk -F, '{print $1}')"
-# for R in $LIST; do ldapsearch -LLL -x -h madc01 -b "ou=UK,ou=Accounts,dc=<domain>,dc=com" "$R" sAMAccountName | grep -v "dn"; done;
+## Change input field separater
+## old_IFS="$IFS"
+## IFS=$'\n'
+## By default, IFS is set to $' \t\n'
+## If you `unset IFS`, it will act as if it had the default value
+# $ for F in $(echo -e "hello you\nHi me"); do echo $F; done;
+# hello
+# you
+# Hi
+# me
+# $ IFS=$'\n'
+# $ for F in $(echo -e "hello you\nHi me"); do echo $F; done;
+# hello you
+# Hi me
+
 
 # Another Join:
 # # tr '\n' ' '
