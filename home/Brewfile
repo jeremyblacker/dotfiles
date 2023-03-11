@@ -4,43 +4,85 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
+# Search tool like grep, but optimized for programmers
 brew "ack"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.7"
+# Automate deployment, configuration, and upgrading
 brew "ansible@2.8"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
+# Official Amazon AWS command-line interface
 brew "awscli"
+# Programmable completion for Bash 3.2
 brew "bash-completion"
+# Informative, fancy bash prompt for Git users
 brew "bash-git-prompt"
+# Color-highlighted diff(1) output
 brew "colordiff"
+# Open source suite of directory software
 brew "openldap"
+# Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Asynchronous event library
 brew "libevent"
+# Library to load and enumerate PKCS#11 modules
 brew "p11-kit"
+# Validating, recursive, caching DNS resolver
 brew "unbound", link: false
+# GNU Transport Layer Security (TLS) Library
 brew "gnutls"
+# GNU Emacs text editor
 brew "emacs", restart_service: true
+# Distributed revision control system
 brew "git"
+# GNU Pretty Good Privacy (PGP) package
 brew "gnupg", link: false
+# GNU grep, egrep and fgrep
 brew "grep"
+# Git dotfiles synchronizer written in bash
 brew "homeshick"
+# Improved top (interactive process viewer)
 brew "htop"
+# Lightweight and flexible command-line JSON processor
 brew "jq"
+# Platform built on V8 to build network applications
 brew "node"
+# JSON parser and validator with a CLI
 brew "jsonlint"
+# HTTP/2 C Library
 brew "nghttp2"
+# Port scanning utility for large networks
 brew "nmap"
+# Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
+# Highly capable, feature-rich programming language
 brew "perl"
+# Show ps output as a tree
 brew "pstree"
+# Python version management
 brew "pyenv"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.10"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.8"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.9"
+# Readline wrapper: adds readline support to tools that lack it
 brew "rlwrap"
+# Terminal multiplexer with VT100/ANSI terminal emulation
 brew "screen"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
+# Utility to modify the macOS Accessibility Database (TCC.db)
 brew "tccutil"
+# Linter for Terraform files
 brew "tflint"
+# Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Internet file retriever
 brew "wget"
+# Terraform
 brew "hashicorp/tap/terraform"
+# Command-line helper for the 1Password password manager
 cask "1password-cli"

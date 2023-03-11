@@ -105,3 +105,8 @@ alias grep-git-blame-timestamps="grep -Eo '[0-9]{4}(-[0-9]{2}){2} ( |[0-9])[0-9]
 # Complains on shell startup. This makes it so that ctrl-s doesn't freeze things up when trying to cycle forward previous commands
 # Need to better understand what this command actually does
 # stty -ixon
+
+## Load Homeshick from local repo if not installed
+if [[ -z $(which homeshick) && -r "$HOME/.homesick/repos/homeshick/homeshick.sh" ]]; then
+    source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+fi
