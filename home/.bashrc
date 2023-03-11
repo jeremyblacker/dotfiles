@@ -69,10 +69,10 @@ function killit {
 
 
 ## Change input field separater
-## old_IFS="$IFS"
-## IFS=$'\n'
 ## By default, IFS is set to $' \t\n'
 ## If you `unset IFS`, it will act as if it had the default value
+# $ echo -n "$IFS" | cat -et  # `cat -et` displays spaces as '^', tabs as '\t', and newlines as '$'
+# ^I$
 # $ for F in $(echo -e "hello you\nHi me"); do echo $F; done;
 # hello
 # you
